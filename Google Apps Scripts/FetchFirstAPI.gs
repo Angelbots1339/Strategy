@@ -6,6 +6,7 @@
  * This tool is meant for demo purposes only. For more information, see https://frc-api-docs.firstinspires.org.                   *
  * Created by Jared Hasen-Klein. Code is offered without any warranty or guarentee.                                               *
  * Modified by 1339 (Alex F, Trevor D)
+ * Modified by 1339 again (Kyle K, Sasha D, Trevor D)
  **********************************************************************************************************************************/
 
 
@@ -99,8 +100,15 @@ function writeDataArrayToSpreadsheet(dataArray, sheetName, flatten=true) {
 
 function fetchScoreBreakdown() {
   var endpoint = `https://frc-api.firstinspires.org/v3.0/${YEAR}/scores/${EVENT}/${MATCH_TYPE}`;
-  let data = fetchData(endpoint);
-  writeDataArrayToSpreadsheet(data.MatchScores, "Score Breakdown");
+  let data = fetchData(endpoint).MatchScores[0];
+  //let data2 = Object.entries(data.alliances[0]).filter(([k, v]) => k == "totalPoints");
+  let data2 = filterData(data.alliances[0], "totalPoints" , "alliance", "hubScore");
+
+  writeDataArrayToSpreadsheet([data2], "Score Breakdown");
+}
+
+function filterData(data, ...wants) {
+    return Object.entries(data).filter(([k, v]) => {console.log(k); return wants.includes(k)});
 }
 
 function fetchMatchSchedule() {
