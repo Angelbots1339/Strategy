@@ -98,17 +98,21 @@ function writeDataArrayToSpreadsheet(dataArray, sheetName, flatten=true) {
   sheet.autoResizeColumns(1, headers.length);
 }
 
-function fetchScoreBreakdown() {
-  var endpoint = `https://frc-api.firstinspires.org/v3.0/${YEAR}/scores/${EVENT}/${MATCH_TYPE}`;
-  let data = fetchData(endpoint).MatchScores[0];
-  //let data2 = Object.entries(data.alliances[0]).filter(([k, v]) => k == "totalPoints");
-  let data2 = filterData(data.alliances[0], "totalPoints" , "alliance", "hubScore");
-
-  writeDataArrayToSpreadsheet([data2], "Score Breakdown");
-}
-
 function filterData(data, ...wants) {
     return Object.entries(data).filter(([k, v]) => {console.log(k); return wants.includes(k)});
+}
+
+function fetchScoreBreakdown() {
+  var endpoint = `https://frc-api.firstinspires.org/v3.0/${YEAR}/scores/${EVENT}/${MATCH_TYPE}`;
+  let data = fetchData(endpoint);
+  writeDataArrayToSpreadsheet(data.MatchScores, "Score Breakdown");
+  
+  var rawData = SpreadsheetApp.getActiveSheet();
+  //this references the sheet after the data is first populated
+  for (let unwantedData = 8; unwantedData > 5; unwantedData--){
+    rawData.deleteColumns(unwantedData);
+  }
+  //crude solution because it happened to be that the columns we didn't want were right next to each other
 }
 
 function fetchMatchSchedule() {
