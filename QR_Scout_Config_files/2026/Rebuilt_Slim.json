@@ -251,7 +251,7 @@
 					"required": true,
 					"code": "DoOa",
 					"formResetBehavior": "reset",
-					"defaultValue": "N/A",
+					"defaultValue": "0",
 					"choices": {
 						"3": "Best",
 						"2": "Mid",
