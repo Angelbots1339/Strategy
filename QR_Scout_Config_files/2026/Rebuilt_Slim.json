@@ -185,7 +185,7 @@
 					}
 				},
 				{
-					"title": "Balls on target",
+					"title": "Shooting Accuracy",
 					"description": "How accurate was their shooting",
 					"type": "select",
 					"required": true,
@@ -236,12 +236,28 @@
 					"defaultValue": false
 				},
 				{
-					"title": "Effectively played defense on opposing alliance",
+					"title": "Pieces Broke Off",
+					"description": "Did they have pieces break off the robot during the match?",
 					"type": "boolean",
 					"required": false,
-					"code": "DoOa",
+					"code": "Brk",
 					"formResetBehavior": "reset",
 					"defaultValue": false
+				},
+
+				{
+					"title": "Defense on opposing alliance",
+					"type": "select",
+					"required": true,
+					"code": "DoOa",
+					"formResetBehavior": "reset",
+					"defaultValue": "",
+					"choices": {
+						"1": "Best",
+						"2": "Mid",
+						"3": "Worst",
+						"0":  "N/A"
+					}
 				},
 				{
 					"title": "Comments",
