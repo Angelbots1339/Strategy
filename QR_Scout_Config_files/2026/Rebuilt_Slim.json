@@ -139,9 +139,9 @@
 					"formResetBehavior": "reset",
 					"defaultValue": "",
 					"choices": {
-						"1": "Best",
+						"3": "Best",
 						"2": "Mid",
-						"3": "Worst"
+						"1": "Worst"
 					}
 				},
 				{
@@ -179,9 +179,9 @@
 					"formResetBehavior": "reset",
 					"defaultValue": "",
 					"choices": {
-						"1": "Best",
+						"3": "Best",
 						"2": "Mid",
-						"3": "Worst"
+						"1": "Worst"
 					}
 				},
 				{
@@ -193,9 +193,9 @@
 					"formResetBehavior": "reset",
 					"defaultValue": "",
 					"choices": {
-						"1": "Best",
+						"3": "Best",
 						"2": "Mid",
-						"3": "Worst"
+						"1": "Worst"
 					}
 				},
 				{
@@ -207,9 +207,9 @@
 					"formResetBehavior": "reset",
 					"defaultValue": "",
 					"choices": {
-						"1": "Best",
+						"3": "Best",
 						"2": "Mid",
-						"3": "Worst"
+						"1": "Worst"
 					}
 				},
 				{
@@ -251,11 +251,11 @@
 					"required": true,
 					"code": "DoOa",
 					"formResetBehavior": "reset",
-					"defaultValue": "",
+					"defaultValue": "N/A",
 					"choices": {
-						"1": "Best",
+						"3": "Best",
 						"2": "Mid",
-						"3": "Worst",
+						"1": "Worst",
 						"0":  "N/A"
 					}
 				},
