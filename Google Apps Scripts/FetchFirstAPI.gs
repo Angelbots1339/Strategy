@@ -23,31 +23,13 @@ const MATCH_TYPE = range_matchtype.getValues();
 const AWARD_YEAR_START = 2015;
 
 // Your API credentials (replace with your actual credentials)
-const API_USERNAME = '';
-const API_TOKEN = '';
+const API_USERNAME = 'misfitsd';
+const API_TOKEN = 'a4b724d5-1027-4340-bcc9-f42b537728e1';
 
 // JSON object keys for reef scoring
 const REEF_KEYS = ["autoReef", "teleopReef"];
 // JSON object keys for individual rows to collapse within the reef scoring object
 const ROW_KEYS = ["topRow", "midRow", "botRow"];
-
-function showUiPrompt() {
-  const ui = SpreadsheetApp.getUi(); // Or DocumentApp.getUi(), etc.
-  const response = ui.prompt(
-    "API Password",
-    "Please enter password for " + API_USERNAME,
-    ui.ButtonSet.OK_CANCEL
-  );
-
-  if (response.getSelectedButton() === ui.Button.OK) {
-    Logger.log("User entered: " + response.getResponseText());
-  } else if (response.getSelectedButton() === ui.Button.CANCEL) {
-    Logger.log("User clicked Cancel.");
-  } else if (response.getSelectedButton() === ui.Button.CLOSE) {
-    Logger.log("User closed the dialog.");
-  }
-}
-
 
 // Function to fetch API data
 function fetchData(endpoint) {  
@@ -139,12 +121,6 @@ function fetchEventDetail() {
   writeDataArrayToSpreadsheet(data.teams, "Event Detail", false);
 }
 
-function fetchChamps() {
-  var endpoint = `https://frc-api.firstinspires.org/v3.0/${YEAR}/teams?eventCode=CMPTX`;
-  var data = fetchData(endpoint);
-  writeDataArrayToSpreadsheet(data.teams, "Champs", false);
-}
-
 function fetchAwards() {
   var dataArray = [];
   for (var i = AWARD_YEAR_START; i <= YEAR; i++) {
@@ -210,21 +186,14 @@ function recursiveFlattenJSON(data, flatItem={}, location="") {
   return flatItem;
 }
 
-// Combines the key functions
-
-function fetchDataAndCreateSheets() {
-  fetchScoreBreakdown();  // This calls fetchAndParseData for score breakdown
-  fetchMatchSchedule();   // This calls fetchAndParseData for match schedule
-  fetchEventDetail();   // This calls fetchAndParseData for Event Detail
-  fetchChamps();      //Pull Champs qualifiers
-}
-
 // Adds a menu item to create the sheets
 
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('FRC API')
-      .addItem('Fetch Data and Create Sheets', fetchDataAndCreateSheets.name)
+      .addItem('Fetch Data', fetchScoreBreakdown.name)
+      .addItem('Fetch Event Teams', fetchEventDetail.name)
+      .addItem('Fetch Event Schedule', fetchMatchSchedule.name) 
       .addItem("Fetch Event Team Data", fetchEventTeamData.name)
       .addItem("Fetch Event Data", fetchEvents.name)
       .addItem("Fetch Award History", fetchAwards.name)
